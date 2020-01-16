@@ -2,3 +2,7 @@ body {
     background-color: #1D1C1C;
     color: blue;
 }
+
+* {
+    font-family: 'Gothic A1', sans-serif;
+}
