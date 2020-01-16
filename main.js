@@ -108,7 +108,9 @@ app.use("/", function (req, res) {
     //     <a href=${url}>Login</a>
     // `)
     // res.send(ejs.render('pages/index'))
-    res.render('pages/index', {url:url})
+    res.render('pages/index', {
+      login_url:url
+    })
 });
  
  
