@@ -8,16 +8,17 @@
         function hndlr(response) {
             let titles = [response.items.length];
             let links = [response.items.length];
-        for (var i = 0; i < response.items.length; i++) {
-          var item = response.items[i];
-        
-          titles[i] = item.htmlTitle;
-          links[i] = item.link;
+            for (var i = 0; i < response.items.length; i++) {
+                var item = response.items[i];
+
+                titles[i] = item.htmlTitle;
+                links[i] = item.link;
+            }
         }
-      }
-      </script>
-      <script src="https://www.googleapis.com/customsearch/v1?key=AIzaSyB2CrU2kt63xcSGPmy7xMYpR95NDqD2SSM&cx=000973762217951130853:ve5xcqgsqcu&q=energys&callback=hndlr">
-      </script>
+    </script>
+    <script
+        src="https://www.googleapis.com/customsearch/v1?key=AIzaSyB2CrU2kt63xcSGPmy7xMYpR95NDqD2SSM&cx=000973762217951130853:ve5xcqgsqcu&q=energys&callback=hndlr">
+        </script>
 
     <script src="https://apis.google.com/js/platform.js" async defer></script>
 
@@ -29,39 +30,40 @@
 
     <%- include('header.ejs') %>
 
-    <% for(var i=0; i<5; i++) {%>
+    
+    <% for (var i = 0; i < 10; i++) { %>
+
          
 
 
     <div>
-        <div class="planner-list">
-            <div class="class">
-                <div class="class-info">
-                    <h4>Teacher Name</h4>
+    <div class="planner-list">
+        <div class="class">
+            <div class="class-info">
+                <h4><%= names[i] %></h4>
 
-                    <h2>Class Name</h2>
-                </div>
-
-                <div class="class-assignList">
-                    <ul>
-                        <li class="high-priority">
-                            Assignment 1 - (due dd/mm)
-                        </li>
-                        <li class="med-priority">
-                            Assignment 2 - (due dd/mm)
-                        </li>
-                        <li class="low-priority">
-                            Assignment 2 - (due dd/mm)
-                        </li>
-                    </ul>
-
-                </div>
+                <h2><%= courses[i].name %></h2>
             </div>
-            <hr>
 
+            <div class="class-assignList">
+                <ul>
+                    <li class="high-priority">
+                        Assignment 1 - (due dd/mm)
+                    </li>
+                    <li class="med-priority">
+                        Assignment 2 - (due dd/mm)
+                    </li>
+                    <li class="low-priority">
+                        Assignment 2 - (due dd/mm)
+                    </li>
+                </ul>
+
+            </div>
         </div>
-    </div>
+        <hr>
 
+    </div>
+    </div>
     <% } %>
 
 </body>
