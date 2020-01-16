@@ -2,8 +2,10 @@
 
 <head>
   <link rel="stylesheet" type="text/css" href="index.css">
+  <link href="https://fonts.googleapis.com/css?family=Gothic+A1&display=swap" rel="stylesheet">
 
   <script src="https://apis.google.com/js/platform.js" async defer></script>
+  
   <script>
 
     function onSuccess(googleUser) {
@@ -29,8 +31,29 @@
 </head>
 
 <body>
-  <p>planr</p>
-  <div class="g-signin2" data-onsuccess="onSignIn"></div>
+
+    <%- include('header.ejs') %>
+
+
+
+<div class="divider">
+
+  <div class="divider-item">
+    <h3>Test</h3>
+    
+  </div>
+
+<div class="divider-item">
+    <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vulputate molestie mi vestibulum semper. In ultrices pulvinar posuere. Vestibulum interdum tristique dolor sit amet vestibulum. Nullam mollis consequat velit, at feugiat elit. Ut molestie quis lectus aliquet sodales. Phasellus mollis posuere mauris, ut eleifend leo porta ut. Aenean tempor leo a lorem euismod facilisis. Maecenas porta sem laoreet magna vestibulum iaculis. Donec lacinia congue rutrum. Sed nec ultricies sem, vitae mattis nulla. Vestibulum sagittis ac neque rutrum congue. Phasellus eleifend fringilla erat, id fermentum ante euismod sit amet. Cras rutrum diam id mi commodo, vitae fermentum ipsum placerat. Donec lacinia imperdiet dui in blandit.</h3>
+    <div class="g-signin2" data-onsuccess="onSignIn"></div>
+
+  </div>
+
+</div>
+
+
+    <%- include('footer.ejs') %>
+
 </body>
 
 </html>

@@ -1,8 +1,50 @@
 body {
     background-color: #1D1C1C;
-    color: blue;
+    margin: 0;
 }
 
 * {
     font-family: 'Gothic A1', sans-serif;
 }
+
+
+.header {
+    background-color: #03396C;
+    color: white;
+    text-align: center;
+    font-size: 30px;
+
+}
+
+
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+
+    background-color: #03396C;
+    color: white;
+    text-align: center;
+    font-size: 7px;
+
+}
+
+
+
+h1{
+    padding: 10px;
+}
+
+.divider {
+    color: white;
+    display: flex;
+    justify-content: space-around;
+   width:60%;
+   padding-left:300px
+}
+
+.divider-item {
+    flex: 0 0 50%;
+    padding: 10px;
+  }
