@@ -1,26 +1,32 @@
+//Imports
 var http = require('http');
 var express = require('express');
 var Session = require('express-session');
+let ejs = require('ejs')
 var {google} = require('googleapis');
+
+//Def's
 var OAuth2 = google.auth.OAuth2;
 const ClientId = "966739472863-dqp2890nk3io6at5pa3l3gatalffst1o.apps.googleusercontent.com";
 const ClientSecret = "-NpxE7x-Qqx9k9STFcsr135w";
 const RedirectionUrl = "http://localhost:5656/oauthCallback";
- 
+
 var app = express();
 app.use(Session({
     secret: 'RoryLikesBoys',
     resave: true,
     saveUninitialized: true
 }));
- 
+
+app.set('view engine', 'ejs');
+app.use(express.static(__dirname + '/public'));
+
 function getOAuthClient () {
     return new OAuth2(ClientId ,  ClientSecret, RedirectionUrl);
 }
  
 function getAuthUrl () {
     var oauth2Client = getOAuthClient();
-    // generate a url that asks permissions for Google+ and Google Calendar scopes
     var scopes = [
        'https://www.googleapis.com/auth/classroom.courses.readonly'
     ];
@@ -42,34 +48,26 @@ app.use("/oauthCallback", function (req, res) {
       if(!err) {
         oauth2Client.setCredentials(tokens);
         session["tokens"]=tokens;
-        res.send(`
-            <h3>Login successful!!<h3>
-            <a href="/details"> Go to details page</a>
-        `);
+        // res.send(`
+        //     <h3>Login successful!!<h3>
+        //     <a href="/details"> Go to details page</a>
+        // `);
+        res.redirect('/details')
       }
       else{
         res.send(`
-            &lt;h3&gt;Login failed!!&lt;/h3&gt;
+        <h3>Login/redirect failed!!! Try clearing cache and reloading</h3>
         `);
       }
     });
 });
- 
+
+
+
 app.use("/details", function (req, res) {
     var oauth2Client = getOAuthClient();
     oauth2Client.setCredentials(req.session["tokens"]);
     listCourses(oauth2Client, res);
- 
-    // var p = new Promise(function (resolve, reject) {
-    //     plus.people.get({ userId: 'me', auth: oauth2Client }, function(err, response) {
-    //         resolve(response || err);
-    //     });
-    // }).then(function (data) {
-    //     res.send(`
-    //         &lt;img src=${data.image.url} /&gt;
-    //         &lt;h3&gt;Hello ${data.displayName}&lt;/h3&gt;
-    //     `);
-    // })
 });
 
 /**
@@ -95,16 +93,22 @@ function listCourses(auth, page_res) {
       console.log('No courses found.');
     }
     console.log(output);
-    page_res.send(output)
+    // page_res.render('index', {courses:courses});
+    page_res.render('pages/planner', {courses:courses});
   });
 }
- 
+
+
+//Login page 
 app.use("/", function (req, res) {
     var url = getAuthUrl();
-    res.send(`
-        <h1> Authentication using google oAuth</h1>
-        <a href=${url}>Login</a>
-    `)
+    // res.render()
+    // res.send(`
+    //     <h1> Authentication using google oAuth</h1>
+    //     <a href=${url}>Login</a>
+    // `)
+    // res.send(ejs.render('pages/index'))
+    res.render('pages/index', {url:url})
 });
  
  
