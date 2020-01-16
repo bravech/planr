@@ -1,0 +1,69 @@
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="index.css">
+    <link href="https://fonts.googleapis.com/css?family=Gothic+A1&display=swap" rel="stylesheet">
+
+    <script>
+        function hndlr(response) {
+            let titles = [response.items.length];
+            let links = [response.items.length];
+        for (var i = 0; i < response.items.length; i++) {
+          var item = response.items[i];
+        
+          titles[i] = item.htmlTitle;
+          links[i] = item.link;
+        }
+      }
+      </script>
+      <script src="https://www.googleapis.com/customsearch/v1?key=AIzaSyB2CrU2kt63xcSGPmy7xMYpR95NDqD2SSM&cx=000973762217951130853:ve5xcqgsqcu&q=energys&callback=hndlr">
+      </script>
+
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+
+    <meta name="google-signin-client_id"
+        content="966739472863-dqp2890nk3io6at5pa3l3gatalffst1o.apps.googleusercontent.com">
+</head>
+
+<body>
+
+    <%- include('header.ejs') %>
+
+    <% for(var i=0; i<5; i++) {%>
+         
+
+
+    <div>
+        <div class="planner-list">
+            <div class="class">
+                <div class="class-info">
+                    <h4>Teacher Name</h4>
+
+                    <h2>Class Name</h2>
+                </div>
+
+                <div class="class-assignList">
+                    <ul>
+                        <li class="high-priority">
+                            Assignment 1 - (due dd/mm)
+                        </li>
+                        <li class="med-priority">
+                            Assignment 2 - (due dd/mm)
+                        </li>
+                        <li class="low-priority">
+                            Assignment 2 - (due dd/mm)
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+            <hr>
+
+        </div>
+    </div>
+
+    <% } %>
+
+</body>
+
+</html>

@@ -1,69 +1,60 @@
-<!-- The top of file index.html -->
-<html itemscope itemtype="http://schema.org/Article">
+<html>
+
 <head>
-  <!-- BEGIN Pre-requisites -->
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js">
-  </script>
-  <script src="https://apis.google.com/js/client:platform.js?onload=start" async defer>
-  </script>
-  <!-- END Pre-requisites -->
-<!-- Continuing the <head> section -->
+  <link rel="stylesheet" type="text/css" href="index.css">
+  <link href="https://fonts.googleapis.com/css?family=Gothic+A1&display=swap" rel="stylesheet">
+
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
+  
+  
+
   <script>
-    function start() {
-      gapi.load('auth2', function() {
-        auth2 = gapi.auth2.init({
-          client_id: '966739472863-dqp2890nk3io6at5pa3l3gatalffst1o.apps.googleusercontent.com',
-          // Scopes to request in addition to 'profile' and 'email'
-          scope: 'https://www.googleapis.com/auth/classroom.courses.readonly'
-        });
+    
+    function onSuccess(googleUser) {
+      console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
+    }
+    function onFailure(error) {
+      console.log(error);
+    }
+    function renderButton() {
+      gapi.signin2.render('my-signin2', {
+        'scope': 'profile email',
+        'width': 240,
+        'height': 50,
+        'longtitle': true,
+        'theme': 'dark',
+        'onsuccess': onSuccess,
+        'onfailure': onFailure
       });
     }
   </script>
+  <meta name="google-signin-client_id"
+    content="966739472863-dqp2890nk3io6at5pa3l3gatalffst1o.apps.googleusercontent.com">
 </head>
+
 <body>
-<!-- Add where you want your sign-in button to render -->
-<!-- Use an image that follows the branding guidelines in a real app -->
-<button id="signinButton">Sign in with Google</button>
-<script>
-  $('#signinButton').click(function() {
-    // signInCallback defined in step 6.
-    auth2.grantOfflineAccess().then(signInCallback);
-  });
-</script>
-<!-- Last part of BODY element in file index.html -->
-<script>
-function signInCallback(authResult) {
-  console.log(authResult)
-  console.log(authResult['code'])
-  if (authResult['code']) {
 
-    // Hide the sign-in button now that the user is authorized, for example:
-    $('#signinButton').attr('style', 'display: none');
+    <%- include('header.ejs') %>
 
-    // Send the code to the server
-    $.ajax({
-      type: 'POST',
-      url: 'http://localhost:5656/storeauth',
-      // Always include an `X-Requested-With` header in every AJAX request,
-      // to protect against CSRF attacks.
-      headers: {
-        'X-Requested-With': 'XMLHttpRequest'
-      },
-      contentType: 'application/x-www-form-urlencoded',
-      success: function(result) {
-        console.log("Successfully send login info");
-        // Handle or verify the server response.
-      },
-      processData: false,
-      data: "code=" + authResult['code']
-      data: authResult['code']
-    });
-  } else {
-    console.log("error: idk how to handle except's")
-    // There was an error.
-  }
-}
-</script>
+
+
+<div class="divider">
+
+  <div class="divider-item">
+    <h3>Test</h3>
+    
+  </div>
+
+<div class="divider-item">
+    <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vulputate molestie mi vestibulum semper. In ultrices pulvinar posuere. Vestibulum interdum tristique dolor sit amet vestibulum. Nullam mollis consequat velit, at feugiat elit. Ut molestie quis lectus aliquet sodales. Phasellus mollis posuere mauris, ut eleifend leo porta ut. Aenean tempor leo a lorem euismod facilisis. Maecenas porta sem laoreet magna vestibulum iaculis. Donec lacinia congue rutrum. Sed nec ultricies sem, vitae mattis nulla. Vestibulum sagittis ac neque rutrum congue. Phasellus eleifend fringilla erat, id fermentum ante euismod sit amet. Cras rutrum diam id mi commodo, vitae fermentum ipsum placerat. Donec lacinia imperdiet dui in blandit.</h3>
+    <div class="g-signin2"  data-onsuccess="onSignIn"></div>
+  </div>
+
+</div>
+
+
+    <%- include('footer.ejs') %>
 
 </body>
+
 </html>
