@@ -56,7 +56,7 @@ function signInCallback(authResult) {
       },
       processData: false,
       data: "code=" + authResult['code']
-      // data: authResult['code']
+      data: authResult['code']
     });
   } else {
     console.log("error: idk how to handle except's")
