@@ -13,28 +13,41 @@
 <body>
 
     <%- include('header.ejs') %>
-    <div class="class">
-        <div>
-            <h4>Teacher Name</h4>
 
-            <h2>Class Name</h2>
-        </div>
+    <% for(var i=0; i<5; i++) {%>
+         
 
-        <div>
-            <ul>
-                <li class="high-priority">
-                    Assignment 1 - (due dd/mm)
-                </li>
-                <li class="med-priority">
-                    Assignment 2 - (due dd/mm)
-                </li>
-                <li class="low-priority">
-                    Assignment 2 - (due dd/mm)
-                </li>
-            </ul>
+
+    <div>
+        <div class="planner-list">
+            <div class="class">
+                <div class="class-info">
+                    <h4>Teacher Name</h4>
+
+                    <h2>Class Name</h2>
+                </div>
+
+                <div class="class-assignList">
+                    <ul>
+                        <li class="high-priority">
+                            Assignment 1 - (due dd/mm)
+                        </li>
+                        <li class="med-priority">
+                            Assignment 2 - (due dd/mm)
+                        </li>
+                        <li class="low-priority">
+                            Assignment 2 - (due dd/mm)
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+            <hr>
 
         </div>
     </div>
+
+    <% } %>
 
 </body>
 

@@ -1,11 +1,14 @@
 body {
     background-color: #1D1C1C;
     margin: 0;
+    color: white;
+
 }
 
 * {
     font-family: 'Gothic A1', sans-serif;
-    color: white;
+    transition: color 0.25s;
+
 }
 
 
@@ -56,3 +59,34 @@ h1{
   .high-priority {
       color: red
   }
+
+
+  .planner-list {
+      margin: 50px;
+  }
+
+  .class {
+    display: flex;
+    align-items: center;
+  }
+
+  .class-info {
+    
+  }
+
+  .class-assignList{
+
+  }
+
+  .logo{
+      text-decoration: none;
+      transition: color 0.25s;
+
+  }
+  .logo:hover{
+color:grey;
+}
+
+.logo:visited {
+    color: white;
+}
