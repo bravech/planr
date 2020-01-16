@@ -11,6 +11,10 @@ app.get('/', (req, res) => {
     res.render('pages/index');
 });
 
+app.get('/assignments', (req, res) => {
+    res.render('pages/planner');
+});
+
 app.listen(5656, () => {
     console.log('http://localhost:5656')
 })
