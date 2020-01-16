@@ -1,0 +1,25 @@
+{
+  "name": "planr",
+  "version": "1.0.0",
+  "description": "ur mom",
+  "main": "index.js",
+  "dependencies": {
+    "ejs": "^3.0.1",
+    "express": "^4.17.1",
+    "googleapis": "^39.2.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bravech/planr.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bravech/planr/issues"
+  },
+  "homepage": "https://github.com/bravech/planr#readme"
+}

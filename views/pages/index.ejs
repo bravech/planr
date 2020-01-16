@@ -1,10 +1,9 @@
 <html>
+
 <head>
-  <meta name="google-signin-client_id" content="YOUR_CLIENT_ID.apps.googleusercontent.com">
-</head>
-<body>
-  <div id="my-signin2"></div>
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
   <script>
+
     function onSuccess(googleUser) {
       console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
     }
@@ -23,7 +22,12 @@
       });
     }
   </script>
+  <meta name="google-signin-client_id"
+    content="966739472863-dqp2890nk3io6at5pa3l3gatalffst1o.apps.googleusercontent.com">
+</head>
 
-  <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+<body>
+  <div class="g-signin2" data-onsuccess="onSignIn"></div>
 </body>
+
 </html>

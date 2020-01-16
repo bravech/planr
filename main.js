@@ -1,10 +1,17 @@
-var http = require("http");
-var express = require("express");
-var app = express();
+// import express from 'express';
+express = require('express')
+let ejs = require('ejs')
+const app = express()
+app.set('view engine', 'ejs');
 
-http.createServer(function (request, response) {
-    response.writeHead(200, {'Content-Type': 'text/plain'});
 
-    response.end("Hello World\n");
-}
-).listen(8081)
+
+app.get('/', (req, res) => {
+    // res.send('Hello World')
+    res.render('pages/index');
+});
+
+app.listen(5656, () => {
+    console.log('http://localhost:5656')
+})
+
