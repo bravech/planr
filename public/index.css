@@ -142,14 +142,12 @@ background: linear-gradient(345deg, rgba(91,0,255,1) 0%, rgba(0,41,255,1) 13%, r
       
         padding: 24px 61px;
         text-decoration: none;
-        margin:auto
+        margin:auto;
+        transition: background-color 0.25s;
       }
   
       .myButton:hover {
-        -webkit-animation: Gradient 50s ease-out infinite;
-        -moz-animation: Gradient 50s ease-out infinite;
-        animation: Gradient 50s ease-out infinite;
-       
+       background-color: #0060ba;
       }
   
       .myButton:active {
