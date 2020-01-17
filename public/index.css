@@ -133,7 +133,7 @@ background: linear-gradient(345deg, rgba(91,0,255,1) 0%, rgba(0,41,255,1) 13%, r
     .myButton {
       
 
-        background-color: #03396C;
+        background-color: #0060ba;
 
         border-radius: 6px;
         cursor: pointer;
@@ -147,7 +147,7 @@ background: linear-gradient(345deg, rgba(91,0,255,1) 0%, rgba(0,41,255,1) 13%, r
       }
   
       .myButton:hover {
-       background-color: #0060ba;
+       background-color:  #03396C;
       }
   
       .myButton:active {
