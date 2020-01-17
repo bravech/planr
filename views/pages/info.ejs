@@ -11,25 +11,23 @@
 
     //creates string to query based on keyWords array
     var queryString = "";
-    for(var i = 0; i < keyWords.length; i++) {
-    queryString += keyWords[i];
-    }
-
-    //attaches query string to script and appends it to file
-    var JSLink = "https://www.googleapis.com/customsearch/v1?key=AIzaSyB2CrU2kt63xcSGPmy7xMYpR95NDqD2SSM&cx=000973762217951130853:ve5xcqgsqcu&q=" + queryString + "&callback=hndlr";
-    var JSElement = document.createElement('script');
-    JSElement.src = JSLink;
-    document.getElementsByTagName('head')[0].appendChild(JSElement);
-
-    //handles json return and puts into titles and links for results from search engine
-     function hndlr(response) {
-        for (var i = 0; i < response.items.length; i++) {
-          var item = response.items[i];
+            for(var i = 0; i < keyWords.length; i++) {
+            queryString += keyWords[i] + " ";
+            }
         
-          titles[i] = item.htmlTitle;
-          links[i]=item.link;
-        }
-    }
+            //attaches query string to script and appends it to file
+            var JSLink = "https://www.googleapis.com/customsearch/v1?key=AIzaSyBhi7qh6PYKCmKJulmtZU6eUsGUWMnvm5U&cx=000973762217951130853:ve5xcqgsqcu&q=" + queryString + "&callback=hndlr";
+            document.write("<script type='text/javascript' src='"+ JSLink + "'></scr" + "ipt>");
+        
+            //handles json return and puts into titles and links for results from search engine
+             function hndlr(response) {
+                for (var i = 0; i < response.items.length; i++) {
+                  var item = response.items[i];
+                
+                  titles[i] = item.htmlTitle;
+                  links[i]=item.link;
+                }
+            }
     </script>
 
 </head>
