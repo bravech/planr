@@ -53,7 +53,7 @@ h1{
   }
 
   .low-priority {
-      color : greenyellow;
+      color : green;
   }
 
   .med-priority {
@@ -61,7 +61,7 @@ h1{
   }
 
   .high-priority {
-      color: red
+      color: red;
   }
 
 
@@ -182,3 +182,14 @@ background: linear-gradient(345deg, rgba(91,0,255,1) 0%, rgba(0,41,255,1) 13%, r
           text-shadow: 0 0 20px #fff, 0 0 30px #ff0000, 0 0 40px #ff0000, 0 0 50px #ff0000, 0 0 60px #ff0000, 0 0 70px #ff0000, 0 0 80px #ff0000;
         }
       }
+
+
+      .link-list ul, .link-list li{
+        padding: 10px 0px;
+
+      }
+
+.link-flex {
+    display: flex;
+    flex-direction: row;
+}
