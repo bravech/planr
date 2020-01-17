@@ -11,6 +11,10 @@ body {
 
 }
 
+a {
+  color:inherit;
+  /* text-decoration: none; */
+ }
 
 .header {
     background-color: #03396C;
