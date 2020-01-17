@@ -77,7 +77,7 @@
                 <ul>
                         <% assignments[i].forEach(function(assignment) { %>
                             <li  class="high-priority">
-                                    <a class="assignment-link" href="/info?id=<%= assignment[2] %>"><%= assignment[0] %>1 - (due <%= assignment[1] %>)</a>
+                                    <a class="assignment-link" href="/info?id=<%= assignment[2] %>&courseId=<%= assignment[3] %>"><%= assignment[0] %>1 - (due <%= assignment[1] %>)</a>
                                 </li>
                             <% }) %>
 
