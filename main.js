@@ -164,6 +164,7 @@ async function get_keywords(auth, page_res, course_id, work_id, course_name) {
   var class_cw = await classroom.courses.courseWork.get({ courseId: course_id, id: work_id });
   var class_mats = class_cw.data.materials;
   console.log(class_mats)
+  var text;
   if (class_mats) {
     const doc_promises = class_mats.map(async mat => {
       var doc = await drive.files.get({
@@ -195,13 +196,15 @@ async function get_keywords(auth, page_res, course_id, work_id, course_name) {
 
     // console.log(files_text_form)
     // console.log(files_text_form[0].data)
-    const text = files_text_form[0].data.toString();
+    text = files_text_form[0].data.toString();
     // for (var i = 0; i < files_text_form.length; i++) {
     //   doc_text += 
     // }
     // console.log("NLP Text:", doc_text, typeof(doc_text))
     // var text = 'Your text to analyze, \  r\n' + 'e.g. Hello, world!';
     console.log(typeof (text))
+  } else {
+    text = course_name;
   }
 
   var document = {
