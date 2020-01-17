@@ -77,7 +77,7 @@
                 <ul>
                         <% assignments[i].forEach(function(assignment) { %>
                             <% var deadline = Math.ceil((new Date(assignment[1] + '/2020').getTime() - new Date().getTime())/ (1000 * 3600 * 24)) ; %>
-                            <%if(deadline < 3) { %>
+                            <%if(deadline < 3 && deadline > -3) { %>
                             <li  class="high-priority">
                                     <a class="assignment-link" href="/info?id=<%= assignment[2] %>&courseId=<%= assignment[3] %>"><%= assignment[0] %>1 - (due <%= assignment[1] %>)</a>
                                 </li>
@@ -86,7 +86,7 @@
                                 <li  class="med-priority">
                                         <a class="assignment-link" href="/info?id=<%= assignment[2] %>&courseId=<%= assignment[3] %>"><%= assignment[0] %>1 - (due <%= assignment[1] %>)</a>
                                     </li>
-                                    <% } else { %>
+                                    <% } else if (deadline < 25) { %>
 
                                     <li  class="low-priority">
                                             <a class="assignment-link" href="/info?id=<%= assignment[2] %>&courseId=<%= assignment[3] %>"><%= assignment[0] %>1 - (due <%= assignment[1] %>)</a>
