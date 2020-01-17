@@ -142,14 +142,12 @@ background: linear-gradient(345deg, rgba(91,0,255,1) 0%, rgba(0,41,255,1) 13%, r
       
         padding: 24px 61px;
         text-decoration: none;
-        margin:auto
+        margin:auto;
+        transition: background-color 0.25s;
       }
   
       .myButton:hover {
-        -webkit-animation: Gradient 50s ease-out infinite;
-        -moz-animation: Gradient 50s ease-out infinite;
-        animation: Gradient 50s ease-out infinite;
-       
+       background-color: #0060ba;
       }
   
       .myButton:active {
@@ -162,3 +160,25 @@ background: linear-gradient(345deg, rgba(91,0,255,1) 0%, rgba(0,41,255,1) 13%, r
     flex-direction: column;
     align-content: center;
 }
+
+
+.assignment-link {
+    text-decoration: none;
+
+}
+
+
+.assignment-link:hover {
+    color: #fff;
+    -webkit-animation: glow 1s ease-in-out infinite alternate;
+    -moz-animation: glow 1s ease-in-out infinite alternate;
+    animation: glow 1s ease-in-out infinite alternate;}
+
+    @-webkit-keyframes glow {
+        from {
+          text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #b70000, 0 0 40px #b70000, 0 0 50px #b70000, 0 0 60px #b70000, 0 0 70px #b70000;
+        }
+        to {
+          text-shadow: 0 0 20px #fff, 0 0 30px #ff0000, 0 0 40px #ff0000, 0 0 50px #ff0000, 0 0 60px #ff0000, 0 0 70px #ff0000, 0 0 80px #ff0000;
+        }
+      }
