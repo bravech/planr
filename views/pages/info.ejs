@@ -7,6 +7,8 @@
     var links = [];
     var keyWords = [];
 
+    
+
     //creates string to query based on keyWords array
     var queryString = "";
     for(var i = 0; i < keyWords.length; i++) {
@@ -35,8 +37,17 @@
 <body>
 
     <%- include('header.ejs') %>
+<h1>Assignment 18:Magic Hash (20 HW Points)</h1>
+<p> BitCoin requires a hash which is prefixed with a number of zeros for its output. When the required number of zeros increases the difficulty of finding it doubles. Recreate the function magicSha256 from “13:Hashes and magic numbers.” discern a numeric property which scales in uncommoness. For example, the results of the hash which are divisible by powers of 2. 2^1 has many things which are divisible by it while 2^999 has very few numbers which are divisible by it. Determine approximate rate of uncommoness your numeric property has as it scales. Turn in all work.</p>
+<h1>Assignment Help</h1>
 
+    <ul>
+            <% for (var i = 0; i < 5; i++) { %>
 
+        <li>Name of link</li>
+        <% } %>
+
+    </ul>
 
     <%- include('footer.ejs') %>
 
