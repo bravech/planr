@@ -165,7 +165,7 @@ async function get_keywords(auth, page_res, course_id, work_id, course_name) {
   var class_mats = class_cw.data.materials;
   var keywords;
   console.log(class_mats)
-  var text;
+  var text = "hello world hopefully you'll never see this";
   if (class_mats) {
     const doc_promises = class_mats.map(async mat => {
       var doc = await drive.files.get({
@@ -204,54 +204,54 @@ async function get_keywords(auth, page_res, course_id, work_id, course_name) {
     // console.log("NLP Text:", doc_text, typeof(doc_text))
     // var text = 'Your text to analyze, \  r\n' + 'e.g. Hello, world!';
     console.log(typeof (text))
+
+    var document = {
+      content: text,
+      type: 'PLAIN_TEXT',
+    };
+    //var document = {
+    //  content: '2-04:Client Side Calc (20 Points)\r\n' +
+    //    'Based on the code in the slides “Input.JS” build a client side calculator then add a multiplication function(5 points),  division function(5 points),  bitwise AND function(5 points) and a bitwise OR function(5 Points).',
+    //    type: 'PLAIN_TEXT'
+    //}
+    console.log(JSON.stringify(document).replace('\\r', ''))
+    document = JSON.parse(JSON.stringify(document).replace('\\r', ''))
+
+    console.log(document.content)
+
+    console.log(document)
+
+    const lang_client = new language.LanguageServiceClient();
+
+    // const [result] = await lang_client.analyzeEntities({ 
+    //   document: document,
+    //   encodingType: "UTF16"
+    // });
+
+    const [result] = await lang_client.analyzeEntities({ document });
+
+
+    const entities = result.entities;
+
+    keywords = [];
+
+    console.log('Entities:');
+    entities.forEach(entity => {
+      console.log(entity.name);
+      keywords.push(entity.name);
+      console.log(` - Type: ${entity.type}, Salience: ${entity.salience}`);
+      if (entity.metadata && entity.metadata.wikipedia_url) {
+        console.log(` - Wikipedia URL: ${entity.metadata.wikipedia_url}`);
+      }
+    });
+
+    console.log(result)
+    console.log(keywords)
+    keywords = keywords.slice(0, 5);
+
   } else {
     keywords = [course_name]
   }
-
-  var document = {
-    content: text,
-    type: 'PLAIN_TEXT',
-  };
-  //var document = {
-  //  content: '2-04:Client Side Calc (20 Points)\r\n' +
-  //    'Based on the code in the slides “Input.JS” build a client side calculator then add a multiplication function(5 points),  division function(5 points),  bitwise AND function(5 points) and a bitwise OR function(5 Points).',
-  //    type: 'PLAIN_TEXT'
-  //}
-  console.log(JSON.stringify(document).replace('\\r', ''))
-  document = JSON.parse(JSON.stringify(document).replace('\\r', ''))
-
-  console.log(document.content)
-
-  console.log(document)
-
-  const lang_client = new language.LanguageServiceClient();
-
-  // const [result] = await lang_client.analyzeEntities({ 
-  //   document: document,
-  //   encodingType: "UTF16"
-  // });
-
-  const [result] = await lang_client.analyzeEntities({ document });
-
-
-  const entities = result.entities;
-
-  keywords = [];
-
-  console.log('Entities:');
-  entities.forEach(entity => {
-    console.log(entity.name);
-    keywords.push(entity.name);
-    console.log(` - Type: ${entity.type}, Salience: ${entity.salience}`);
-    if (entity.metadata && entity.metadata.wikipedia_url) {
-      console.log(` - Wikipedia URL: ${entity.metadata.wikipedia_url}`);
-    }
-  });
-
-  console.log(result)
-  console.log(keywords)
-  keywords = keywords.slice(0, 5);
-
 
 
 
