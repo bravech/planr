@@ -1,7 +1,15 @@
 var http = require('http');
 var express = require('express');
 var Session = require('express-session');
+<<<<<<< Updated upstream
 var {google} = require('googleapis');
+=======
+let ejs = require('ejs')
+var { google } = require('googleapis');
+
+
+//Def's
+>>>>>>> Stashed changes
 var OAuth2 = google.auth.OAuth2;
 const ClientId = "966739472863-dqp2890nk3io6at5pa3l3gatalffst1o.apps.googleusercontent.com";
 const ClientSecret = "-NpxE7x-Qqx9k9STFcsr135w";
