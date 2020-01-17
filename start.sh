@@ -1,0 +1,2 @@
+export GOOGLE_APPLICATION_CREDENTIALS="Planr-10807f39607e.json"
+node main.js
