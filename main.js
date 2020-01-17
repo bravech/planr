@@ -11,7 +11,7 @@ var { google } = require('googleapis');
 var OAuth2 = google.auth.OAuth2;
 const ClientId = "966739472863-dqp2890nk3io6at5pa3l3gatalffst1o.apps.googleusercontent.com";
 const ClientSecret = "-NpxE7x-Qqx9k9STFcsr135w";
-const RedirectionUrl = "http://localhost:5656/oauthCallback";
+const RedirectionUrl = "http://planr.live/oauthCallback";
 
 var app = express();
 app.use(Session({
@@ -164,6 +164,7 @@ async function get_keywords(auth, page_res, course_id, work_id, course_name) {
   var class_cw = await classroom.courses.courseWork.get({ courseId: course_id, id: work_id });
   var class_mats = class_cw.data.materials;
   console.log(class_mats)
+  if(class_mats){
   const doc_promises = class_mats.map(async mat => {
     var doc = await drive.files.get({
       fileId: mat.driveFile.driveFile.id
@@ -190,6 +191,7 @@ async function get_keywords(auth, page_res, course_id, work_id, course_name) {
   });
 
   const files_text_form = await Promise.all(text_promises);
+  } 
 
   // console.log(files_text_form)
   // console.log(files_text_form[0].data)
@@ -198,19 +200,19 @@ async function get_keywords(auth, page_res, course_id, work_id, course_name) {
   //   doc_text += 
   // }
   // console.log("NLP Text:", doc_text, typeof(doc_text))
-  const text = 'Your text to analyze, \r\n' + 'e.g. Hello, world!';
+  var text = 'Your text to analyze, \r\n' + 'e.g. Hello, world!';
   console.log(typeof (text))
 
 
-  // const document = {
-  //   content: text,
-  //   type: 'PLAIN_TEXT',
-  // };
   var document = {
-    content: '2-04:Client Side Calc (20 Points)\r\n' +
-      'Based on the code in the slides “Input.JS” build a client side calculator then add a multiplication function(5 points),  division function(5 points),  bitwise AND function(5 points) and a bitwise OR function(5 Points).',
-      type: 'PLAIN_TEXT'
-  }
+    content: text,
+    type: 'PLAIN_TEXT',
+  };
+  //var document = {
+  //  content: '2-04:Client Side Calc (20 Points)\r\n' +
+  //    'Based on the code in the slides “Input.JS” build a client side calculator then add a multiplication function(5 points),  division function(5 points),  bitwise AND function(5 points) and a bitwise OR function(5 Points).',
+  //    type: 'PLAIN_TEXT'
+  //}
   console.log(JSON.stringify(document).replace('\\r', ''))
   document = JSON.parse(JSON.stringify(document).replace('\\r', ''))
 
@@ -275,7 +277,7 @@ app.use("/", function (req, res) {
 });
 
 
-var port = 5656;
+var port = 80;
 var server = http.createServer(app);
 server.listen(port);
 server.on('listening', function () {
