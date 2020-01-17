@@ -163,6 +163,7 @@ async function get_keywords(auth, page_res, course_id, work_id, course_name) {
 
   var class_cw = await classroom.courses.courseWork.get({ courseId: course_id, id: work_id });
   var class_mats = class_cw.data.materials;
+  var keywords;
   console.log(class_mats)
   var text;
   if (class_mats) {
@@ -196,7 +197,7 @@ async function get_keywords(auth, page_res, course_id, work_id, course_name) {
 
     // console.log(files_text_form)
     // console.log(files_text_form[0].data)
-    text = files_text_form[0].data.toString();
+    const text = files_text_form[0].data.toString();
     // for (var i = 0; i < files_text_form.length; i++) {
     //   doc_text += 
     // }
@@ -204,7 +205,7 @@ async function get_keywords(auth, page_res, course_id, work_id, course_name) {
     // var text = 'Your text to analyze, \  r\n' + 'e.g. Hello, world!';
     console.log(typeof (text))
   } else {
-    text = course_name;
+    keywords = [course_name]
   }
 
   var document = {
@@ -235,7 +236,7 @@ async function get_keywords(auth, page_res, course_id, work_id, course_name) {
 
   const entities = result.entities;
 
-  var keywords = [];
+  keywords = [];
 
   console.log('Entities:');
   entities.forEach(entity => {
