@@ -31,7 +31,9 @@ function getAuthUrl() {
     'https://www.googleapis.com/auth/classroom.courses.readonly',
     'https://www.googleapis.com/auth/classroom.rosters',
     'https://www.googleapis.com/auth/classroom.coursework.students.readonly',
-    'https://www.googleapis.com/auth/classroom.coursework.me.readonly'
+    'https://www.googleapis.com/auth/classroom.coursework.me.readonly',
+    'https://www.googleapis.com/auth/documents.readonly',
+    'https://www.googleapis.com/auth/drive.readonly'
   ];
 
   var url = oauth2Client.generateAuthUrl({
@@ -120,7 +122,7 @@ async function listCourses(auth, page_res) {
           //   dueDate: dd,
           //   cw_id: cw.id
           // });
-          cw_list.push([cw.title,dd,cw.id]);
+          cw_list.push([cw.title, dd, cw.id, cw.courseId]);
         });
       }
       console.log(cw_list);
@@ -137,9 +139,65 @@ async function listCourses(auth, page_res) {
     assignments: assignments
     // async: true
   });
+}
+
+app.use("/info", function (req, res) {
+  var oauth2Client = getOAuthClient();
+  oauth2Client.setCredentials(req.session["tokens"]);
+  var work_id = req.query.id;
+  var course_id = req.query.courseId;
+  console.log("Course ID:", course_id)
+  console.log("ClassWork ID:", work_id)
+  get_keywords(oauth2Client, res, course_id, work_id);
+});
+
+async function get_keywords(auth, page_res, course_id, work_id) {
+  const classroom = google.classroom({ version: 'v1', auth });
+  const drive = google.drive({ version: 'v3', auth });
+  const docs = google.docs({ version: 'v1', auth });
+
+
+  var class_cw = await classroom.courses.courseWork.get({ courseId: course_id, id: work_id });
+  var class_mats = class_cw.data.materials;
+  console.log(class_mats)
+  const doc_promises = class_mats.map(async mat => {
+    var doc = await drive.files.get({
+      fileId: mat.driveFile.driveFile.id
+    })
+    return doc;
+  });
+  console.log(class_mats[0].driveFile.driveFile.id)
+
+  const class_files = await Promise.all(doc_promises);
+
+  console.log(class_files);
+
+  const text_promises = class_files.map(async cf => {
+    // var output_text = "";
+    switch (cf.data.mimeType) {
+      case 'application/vnd.google-apps.document':
+        return await drive.files.export({
+          fileId: cf.data.id,
+          mimeType: 'text/plain'
+        }, {
+          responseType: 'text'
+        })
+    }
+  });
+
+  const files_text_form = await Promise.all(text_promises);
+  const extracted_text = files_text_form.forEach(dl_file => {
+    return dl_file.data;
+  });
+
+  // console.log(files_text_form)
+  console.log(files_text_form[0].data)
 
 
 
+  page_res.render('pages/info', {
+
+  })
 }
 
 

@@ -2,9 +2,34 @@
 
 <head>
     <link rel="stylesheet" type="text/css" href="index.css">
-    <script
-        src="https://www.googleapis.com/customsearch/v1?key=AIzaSyB2CrU2kt63xcSGPmy7xMYpR95NDqD2SSM&cx=000973762217951130853:ve5xcqgsqcu&q=energys&callback=hndlr">
-        </script>
+    <script>
+    var titles = [];
+    var links = [];
+    var keyWords = [];
+
+    //creates string to query based on keyWords array
+    var queryString = "";
+    for(var i = 0; i < keyWords.length; i++) {
+    queryString += keyWords[i];
+    }
+
+    //attaches query string to script and appends it to file
+    var JSLink = "https://www.googleapis.com/customsearch/v1?key=AIzaSyB2CrU2kt63xcSGPmy7xMYpR95NDqD2SSM&cx=000973762217951130853:ve5xcqgsqcu&q=" + queryString + "&callback=hndlr";
+    var JSElement = document.createElement('script');
+    JSElement.src = JSLink;
+    document.getElementsByTagName('head')[0].appendChild(JSElement);
+
+    //handles json return and puts into titles and links for results from search engine
+     function hndlr(response) {
+        for (var i = 0; i < response.items.length; i++) {
+          var item = response.items[i];
+        
+          titles[i] = item.htmlTitle;
+          links[i]=item.link;
+        }
+    }
+    </script>
+
 </head>
 
 <body>
