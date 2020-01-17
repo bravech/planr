@@ -195,12 +195,12 @@ async function get_keywords(auth, page_res, course_id, work_id, course_name) {
 
   // console.log(files_text_form)
   // console.log(files_text_form[0].data)
-  // const text = files_text_form[0].data.toString();
+  const text = files_text_form[0].data.toString();
   // for (var i = 0; i < files_text_form.length; i++) {
   //   doc_text += 
   // }
   // console.log("NLP Text:", doc_text, typeof(doc_text))
-  var text = 'Your text to analyze, \r\n' + 'e.g. Hello, world!';
+  // var text = 'Your text to analyze, \r\n' + 'e.g. Hello, world!';
   console.log(typeof (text))
 
 
