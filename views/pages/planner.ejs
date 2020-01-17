@@ -47,7 +47,7 @@
             
 
             <div class="class-assignList">
-                <ul>
+                <!-- <ul>
                     <% if(assignments[i].length == 3) {   %>
                     <li class="high-priority">
                         <a href="/info?id=<%= assignments[i][2][2] %>"><%= assignments[i][2][0] %>1 - (due <%= assignments[i][2][1] %>)</a>
@@ -72,6 +72,15 @@
                         <a href="/info?id=<%= assignments[i][0][2] %>"><%= assignments[i][0][0] %>1 - (due <%= assignments[i][0][1] %>)</a>
                     </li>
                     <% } %>
+                </ul> -->
+
+                <ul>
+                        <% assignments[i].forEach(function(assignment) { %>
+                            <li class="high-priority">
+                                    <a href="/info?id=<%= assignment[2] %>"><%= assignment[0] %>1 - (due <%= assignment[1] %>)</a>
+                                </li>
+                            <% }) %>
+
                 </ul>
 
             </div>

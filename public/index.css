@@ -95,3 +95,70 @@ color:grey;
     color: white;
 }
 
+
+.twiggle {
+
+    text-align:center; font-size:10em;    margin-bottom: 0;
+
+
+    background: rgb(91,0,255);
+background: linear-gradient(345deg, rgba(91,0,255,1) 0%, rgba(0,41,255,1) 13%, rgba(91,0,255,1) 25%, rgba(0,41,255,1) 38%, rgba(91,0,255,1) 51%, rgba(0,255,224,1) 64%, rgba(0,41,255,1) 77%, rgba(0,255,224,1) 90%, rgba(0,41,255,1) 100%);
+
+	background-size: 500% 500%;
+	-webkit-animation: Gradient 25s ease-out infinite;
+	-moz-animation: Gradient 25s ease-out infinite;
+    animation: Gradient 25s ease-out infinite;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    width: 100%
+}
+	
+    
+    @-webkit-keyframes Gradient {
+		0%{background-position:0% 50%}
+		50%{background-position:100% 50%}
+		100%{background-position:0% 50%}
+	}
+	@-moz-keyframes Gradient {
+		0%{background-position:0% 50%}
+		50%{background-position:100% 50%}
+		100%{background-position:0% 50%}
+	}
+	@keyframes Gradient { 
+		0%{background-position:0% 50%}
+		50%{background-position:100% 50%}
+		100%{background-position:0% 50%}
+    }
+    
+    .myButton {
+      
+
+        background-color: #03396C;
+
+        border-radius: 6px;
+        cursor: pointer;
+        color: #ffffff;
+        font-size: 40px;
+      
+        padding: 24px 61px;
+        text-decoration: none;
+        margin:auto
+      }
+  
+      .myButton:hover {
+        -webkit-animation: Gradient 50s ease-out infinite;
+        -moz-animation: Gradient 50s ease-out infinite;
+        animation: Gradient 50s ease-out infinite;
+       
+      }
+  
+      .myButton:active {
+        position: relative;
+        top: 1px;
+      }
+  
+.home-flex {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+}
