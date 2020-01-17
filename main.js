@@ -138,7 +138,7 @@ async function listCourses(auth, page_res) {
   page_res.render('pages/planner', {
     courses: courses,
     names: teachers,
-    assignments: assignments
+    assignments: assignments,
     // async: true
   });
 }
@@ -148,12 +148,14 @@ app.use("/info", function (req, res) {
   oauth2Client.setCredentials(req.session["tokens"]);
   var work_id = req.query.id;
   var course_id = req.query.courseId;
+  var course_name = decodeURIComponent(req.query.name);
   console.log("Course ID:", course_id)
   console.log("ClassWork ID:", work_id)
-  get_keywords(oauth2Client, res, course_id, work_id);
+  console.log("Course Name:", course_name)
+  get_keywords(oauth2Client, res, course_id, work_id, course_name);
 });
 
-async function get_keywords(auth, page_res, course_id, work_id) {
+async function get_keywords(auth, page_res, course_id, work_id, course_name) {
   const classroom = google.classroom({ version: 'v1', auth });
   const drive = google.drive({ version: 'v3', auth });
   const docs = google.docs({ version: 'v1', auth });
@@ -188,24 +190,72 @@ async function get_keywords(auth, page_res, course_id, work_id) {
   });
 
   const files_text_form = await Promise.all(text_promises);
-  const extracted_text = files_text_form.forEach(dl_file => {
-    return dl_file.data;
-  });
 
   // console.log(files_text_form)
   // console.log(files_text_form[0].data)
-  var doc_text = "";
+  // const text = files_text_form[0].data.toString();
+  // for (var i = 0; i < files_text_form.length; i++) {
+  //   doc_text += 
+  // }
+  // console.log("NLP Text:", doc_text, typeof(doc_text))
+  const text = 'Your text to analyze, \r\n' + 'e.g. Hello, world!';
+  console.log(typeof (text))
+
+
+  // const document = {
+  //   content: text,
+  //   type: 'PLAIN_TEXT',
+  // };
+  var document = {
+    content: '2-04:Client Side Calc (20 Points)\r\n' +
+      'Based on the code in the slides “Input.JS” build a client side calculator then add a multiplication function(5 points),  division function(5 points),  bitwise AND function(5 points) and a bitwise OR function(5 Points).',
+      type: 'PLAIN_TEXT'
+  }
+  console.log(JSON.stringify(document).replace('\\r', ''))
+  document = JSON.parse(JSON.stringify(document).replace('\\r', ''))
+
+  console.log(document.content)
+
+  console.log(document)
+
   const lang_client = new language.LanguageServiceClient();
 
-  const [result] = await client.analyzeSentiment({document: document});
+  // const [result] = await lang_client.analyzeEntities({ 
+  //   document: document,
+  //   encodingType: "UTF16"
+  // });
+
+  const [result] = await lang_client.analyzeEntities({ document });
+
+
+  const entities = result.entities;
+
+  var keywords = [];
+
+  console.log('Entities:');
+  entities.forEach(entity => {
+    console.log(entity.name);
+    keywords.push(entity.name);
+    console.log(` - Type: ${entity.type}, Salience: ${entity.salience}`);
+    if (entity.metadata && entity.metadata.wikipedia_url) {
+      console.log(` - Wikipedia URL: ${entity.metadata.wikipedia_url}`);
+    }
+  });
+
+  console.log(result)
+  console.log(keywords)
+  keywords = keywords.slice(5);
 
 
 
 
+  //title, body
 
 
   page_res.render('pages/info', {
-
+    title: course_name, 
+    body: text, 
+    keywords: keywords
   })
 }
 
