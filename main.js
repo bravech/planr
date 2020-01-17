@@ -164,45 +164,45 @@ async function get_keywords(auth, page_res, course_id, work_id, course_name) {
   var class_cw = await classroom.courses.courseWork.get({ courseId: course_id, id: work_id });
   var class_mats = class_cw.data.materials;
   console.log(class_mats)
-  if(class_mats){
-  const doc_promises = class_mats.map(async mat => {
-    var doc = await drive.files.get({
-      fileId: mat.driveFile.driveFile.id
-    })
-    return doc;
-  });
-  console.log(class_mats[0].driveFile.driveFile.id)
+  if (class_mats) {
+    const doc_promises = class_mats.map(async mat => {
+      var doc = await drive.files.get({
+        fileId: mat.driveFile.driveFile.id
+      })
+      return doc;
+    });
+    console.log(class_mats[0].driveFile.driveFile.id)
 
-  const class_files = await Promise.all(doc_promises);
+    const class_files = await Promise.all(doc_promises);
 
-  console.log(class_files);
+    console.log(class_files);
 
-  const text_promises = class_files.map(async cf => {
-    // var output_text = "";
-    switch (cf.data.mimeType) {
-      case 'application/vnd.google-apps.document':
-        return await drive.files.export({
-          fileId: cf.data.id,
-          mimeType: 'text/plain'
-        }, {
-          responseType: 'text'
-        })
-    }
-  });
+    const text_promises = class_files.map(async cf => {
+      // var output_text = "";
+      switch (cf.data.mimeType) {
+        case 'application/vnd.google-apps.document':
+          return await drive.files.export({
+            fileId: cf.data.id,
+            mimeType: 'text/plain'
+          }, {
+            responseType: 'text'
+          })
+      }
+    });
 
-  const files_text_form = await Promise.all(text_promises);
-  } 
+    const files_text_form = await Promise.all(text_promises);
 
-  // console.log(files_text_form)
-  // console.log(files_text_form[0].data)
-  const text = files_text_form[0].data.toString();
-  // for (var i = 0; i < files_text_form.length; i++) {
-  //   doc_text += 
-  // }
-  // console.log("NLP Text:", doc_text, typeof(doc_text))
-  // var text = 'Your text to analyze, \r\n' + 'e.g. Hello, world!';
-  console.log(typeof (text))
 
+    // console.log(files_text_form)
+    // console.log(files_text_form[0].data)
+    const text = files_text_form[0].data.toString();
+    // for (var i = 0; i < files_text_form.length; i++) {
+    //   doc_text += 
+    // }
+    // console.log("NLP Text:", doc_text, typeof(doc_text))
+    // var text = 'Your text to analyze, \  r\n' + 'e.g. Hello, world!';
+    console.log(typeof (text))
+  }
 
   var document = {
     content: text,
@@ -255,8 +255,8 @@ async function get_keywords(auth, page_res, course_id, work_id, course_name) {
 
 
   page_res.render('pages/info', {
-    title: course_name, 
-    body: text, 
+    title: course_name,
+    body: text,
     keywords: keywords
   })
 }
