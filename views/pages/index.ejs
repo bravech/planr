@@ -2,6 +2,13 @@
 
 <head>
   <link rel="stylesheet" type="text/css" href="index.css">
+
+  <link href="https://fonts.googleapis.com/css?family=Gothic+A1&display=swap" rel="stylesheet">
+
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
+  
+  
+
   <style>
     .myButton {
       box-shadow: 0px 1px 0px 0px #f0f7fa;
@@ -21,6 +28,7 @@
       margin:auto
     }
 
+
     .myButton:hover {
       background: linear-gradient(to bottom, #019ad2 5%, #33bdef 100%);
       background-color: #019ad2;
@@ -37,19 +45,36 @@
       /* border: 3px solid #73AD21; */
       /* padding: 10px; */
     }
+
   </style>
 </head>
 
 <body>
 
+
   <%- include('header.ejs') %>
+
 
   <h1 style="text-align:center; font-size:8em">Welcome to planr</h1>
   <div class="center">
     <a href="<%= login_url %>" class="myButton">Login</a>
   </div>
 
+   <div id="stars1">
+      <div id="stars2">
+          <div id="stars3">
+
+  <%- include('header.ejs') %>
+
+
+  <div class="home-flex">
+  <h1 class="twiggle">planr</h1>
+
+  <h2 style="text-align:center; font-size:2em; margin-top: 0;">The Future of Planning</h2>
+    <a href="<%= login_url %>" class="myButton">Login</a>
+  </div>
   <%- include('footer.ejs') %>
+
 
 </body>
 
