@@ -29,7 +29,9 @@ function getAuthUrl() {
   var oauth2Client = getOAuthClient();
   var scopes = [
     'https://www.googleapis.com/auth/classroom.courses.readonly',
-    'https://www.googleapis.com/auth/classroom.rosters'
+    'https://www.googleapis.com/auth/classroom.rosters',
+    'https://www.googleapis.com/auth/classroom.coursework.students.readonly',
+    'https://www.googleapis.com/auth/classroom.coursework.me.readonly'
   ];
 
   var url = oauth2Client.generateAuthUrl({
@@ -78,9 +80,10 @@ app.use("/details", function (req, res) {
  */
 async function listCourses(auth, page_res) {
   const classroom = google.classroom({ version: 'v1', auth });
-  var res = await classroom.courses.list({ pageSize: 10 }); // , (err, res) => {
+  var res = await classroom.courses.list({ pageSize: 0, courseStates: "ACTIVE" }); // , (err, res) => {
   const courses = res.data.courses;
   var teachers;
+  var assignments;
   if (courses && courses.length) {
     console.log('Courses:');
     // courses.forEach((course) => {
@@ -101,13 +104,37 @@ async function listCourses(auth, page_res) {
     // }
 
     // });
-    console.log('asdf')
+    const ass_promises = courses.map(async course => {
+      var res = await classroom.courses.courseWork.list({ courseId: course.id, orderBy: "dueDate desc", pageSize: 3 });
+      // console.log(res);
+      var cw_list = [];
+      if (res.data.courseWork) {
+        res.data.courseWork.forEach(async cw => {
+          if (cw.dueDate) {
+            var dd = "" + cw.dueDate.month + "/" + cw.dueDate.day;
+          } else {
+            var dd = "Never";
+          }
+          // cw_list.push({
+          //   name: cw.title,
+          //   dueDate: dd,
+          //   cw_id: cw.id
+          // });
+          cw_list.push([cw.title,dd,cw.id]);
+        });
+      }
+      console.log(cw_list);
+      return cw_list;
+    });
+    assignments = await Promise.all(ass_promises);
+    console.log('Courses loaded successfully')
   } else {
     console.log('No courses found.');
   }
   page_res.render('pages/planner', {
     courses: courses,
     names: teachers,
+    assignments: assignments
     // async: true
   });
 

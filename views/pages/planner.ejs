@@ -31,7 +31,7 @@
     <%- include('header.ejs') %>
 
     
-    <% for (var i = 0; i < 10; i++) { %>
+    <% for (var i = 0; i < names.length; i++) { %>
 
          
 
@@ -44,18 +44,34 @@
 
                 <h2><%= courses[i].name %></h2>
             </div>
+            
 
             <div class="class-assignList">
                 <ul>
+                    <% if(assignments[i].length == 3) {   %>
                     <li class="high-priority">
-                        Assignment 1 - (due dd/mm)
+                        <%= assignments[i][2][0] %>1 - (due <%= assignments[i][2][1] %>)
                     </li>
                     <li class="med-priority">
-                        Assignment 2 - (due dd/mm)
+                        <%= assignments[i][1][0] %>1 - (due <%= assignments[i][1][1] %>)
                     </li>
                     <li class="low-priority">
-                        Assignment 2 - (due dd/mm)
+                        <%= assignments[i][0][0] %>1 - (due <%= assignments[i][0][1] %>)
                     </li>
+                    <% } %>
+                    <% if(assignments[i].length == 2) {   %>
+                    <li class="high-priority">
+                        <%= assignments[i][1][0] %>1 - (due <%= assignments[i][1][1] %>)
+                    </li>
+                    <li class="med-priority">
+                        <%= assignments[i][0][0] %>1 - (due <%= assignments[i][0][1] %>)
+                    </li>
+                    <% } %>
+                    <% if(assignments[i].length == 1) {   %>
+                    <li class="high-priority">
+                        <%= assignments[i][0][0] %>1 - (due <%= assignments[i][0][1] %>)
+                    </li>
+                    <% } %>
                 </ul>
 
             </div>
