@@ -84,12 +84,12 @@
                                  <% } else if(deadline < 5) { %>
 
                                 <li  class="med-priority">
-                                        <a class="assignment-link" href="/info?id=<%= assignment[2] %>&courseId=<%= assignment[3] %>"><%= assignment[0] %>1 - (due <%= assignment[1] %>)</a>
+                                        <a class="assignment-link" href="/info?id=<%= assignment[2] %>&courseId=<%= assignment[3] %>&name=<%= encodeURIComponent(courses[i].name)  %>"><%= assignment[0] %>1 - (due <%= assignment[1] %>)</a>
                                     </li>
                                     <% } else if (deadline < 25) { %>
 
                                     <li  class="low-priority">
-                                            <a class="assignment-link" href="/info?id=<%= assignment[2] %>&courseId=<%= assignment[3] %>"><%= assignment[0] %>1 - (due <%= assignment[1] %>)</a>
+                                            <a class="assignment-link" href="/info?id=<%= assignment[2] %>&courseId=<%= assignment[3] %>&name=<%= encodeURIComponent(courses[i].name)  %>"><%= assignment[0] %>1 - (due <%= assignment[1] %>)</a>
                                         </li><!---->
                                         <%}%> 
 
