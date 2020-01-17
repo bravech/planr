@@ -29,6 +29,15 @@
                   links[i]=item.link;
                 }
             }
+    // var ass_list = document.getElementById('ass_list');
+    window.onload = function() {
+    var out = "";
+
+    for (var i = 0; i < 5; i++) {
+        out += '<li class="link-flex"><div> <a href="' + links[i] + '" target="_blank" >' + titles[i] + '</a> <p style="margin: 0"></p></div></li>';
+    }
+    document.getElementById('ass_list').innerHTML = out;
+}
     </script>
 
 </head>
@@ -46,11 +55,11 @@ width: 50%;">
 <p style="text-align: center;"> BitCoin requires a hash which is prefixed with a number of zeros for its output. When the required number of zeros increases the difficulty of finding it doubles. Recreate the function magicSha256 from “13:Hashes and magic numbers.” discern a numeric property which scales in uncommoness. For example, the results of the hash which are divisible by powers of 2. 2^1 has many things which are divisible by it while 2^999 has very few numbers which are divisible by it. Determine approximate rate of uncommoness your numeric property has as it scales. Turn in all work.</p>
 <h1>Assignment Help</h1>
 
-    <ul class="link-list" style = "list-style: none;">
+    <ul class="link-list" style = "list-style: none;" id="ass_list">
             <% for (var i = 0; i < 5; i++) { %>
 
         <li class="link-flex">
-                <img src="https://upload.wikimedia.org/wikipedia/en/2/27/Bliss_%28Windows_XP%29.png" style="max-height: 50px; max-width: 100px; margin-right: 10px">
+                <!-- <img src="https://upload.wikimedia.org/wikipedia/en/2/27/Bliss_%28Windows_XP%29.png" style="max-height: 50px; max-width: 100px; margin-right: 10px"> -->
                 <div> <a href="https://www.google.com" target="_blank" > Link !</a> <p style="margin: 0"> Description of my link</p></div>
 
         </li>
