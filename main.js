@@ -3,6 +3,8 @@ var http = require('http');
 var express = require('express');
 var Session = require('express-session');
 let ejs = require('ejs')
+const language = require('@google-cloud/language');
+
 var { google } = require('googleapis');
 
 //Def's
@@ -191,7 +193,14 @@ async function get_keywords(auth, page_res, course_id, work_id) {
   });
 
   // console.log(files_text_form)
-  console.log(files_text_form[0].data)
+  // console.log(files_text_form[0].data)
+  var doc_text = "";
+  const lang_client = new language.LanguageServiceClient();
+
+  const [result] = await client.analyzeSentiment({document: document});
+
+
+
 
 
 
