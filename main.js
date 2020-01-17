@@ -244,7 +244,7 @@ async function get_keywords(auth, page_res, course_id, work_id, course_name) {
 
   console.log(result)
   console.log(keywords)
-  keywords = keywords.slice(5);
+  keywords = keywords.slice(0, 5);
 
 
 
