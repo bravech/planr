@@ -165,7 +165,7 @@ async function get_keywords(auth, page_res, course_id, work_id, course_name) {
   var class_mats = class_cw.data.materials;
   var keywords;
   console.log(class_mats)
-  var text = "hello world hopefully you'll never see this";
+  var text = "hello world hopefully you'll never see this. if you do, it's because the assignment has a nonexisting/wrong-type attachment";
   if (class_mats) {
     const doc_promises = class_mats.map(async mat => {
       var doc = await drive.files.get({
@@ -248,10 +248,13 @@ async function get_keywords(auth, page_res, course_id, work_id, course_name) {
     console.log(result)
     console.log(keywords)
     keywords = keywords.slice(0, 5);
-
   } else {
     keywords = [course_name]
   }
+  if (keywords == undefined) {
+    keywords = [course_name]
+  }
+
 
 
 
