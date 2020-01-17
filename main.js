@@ -197,7 +197,7 @@ async function get_keywords(auth, page_res, course_id, work_id, course_name) {
 
     // console.log(files_text_form)
     // console.log(files_text_form[0].data)
-    const text = files_text_form[0].data.toString();
+    text = files_text_form[0].data.toString();
     // for (var i = 0; i < files_text_form.length; i++) {
     //   doc_text += 
     // }
