@@ -7,6 +7,9 @@
     var links = [];
     // var keyWords = [<%= keywords.toString() %>];
     var keyWords = <%- JSON.stringify(keywords) %>;
+    if (keyWords.length == 1) {
+	keyWords = keyWords[0].split(" ");
+    }
 
     
 
